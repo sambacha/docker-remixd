@@ -1,5 +1,8 @@
 *
 !Dockerfile
 !LICENSE
-!package/**/*
 !origins.json
+*.git
+*.github
+build.sh
+docker-compose.yml
