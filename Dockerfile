@@ -17,6 +17,6 @@ RUN sed -i s/127.0.0.1/0.0.0.0/g /usr/local/lib/node_modules/\@remix-project/rem
 
 COPY origins.json /usr/local/lib/node_modules/\@remix-project/remixd/
 
-EXPOSE 65520 8080 8000
+EXPOSE 65520 8080 8000 65522
 
 ENTRYPOINT ["/usr/local/bin/remixd", "-s", "/app"]
