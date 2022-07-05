@@ -35,7 +35,7 @@ ENTRYPOINT ["/usr/local/bin/remixd", "-s", "/app"]
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Remixd" \
       org.label-schema.description="Remixd Toolchain" \
-      org.label-schema.url="https://ggithub.com/sambacha/docker-remixd" \
+      org.label-schema.url="https://github.com/sambacha/docker-remixd" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.vcs-url="https://github.com/sambacha/docker-remixd.git" \
       org.label-schema.vendor="CommodityStream, Inc" \
