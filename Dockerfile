@@ -7,7 +7,7 @@ USER root
 
 RUN set -eux; \
 	apt-get update; \
-	DEBIAN_FRONTEND=noninteractive apt-get install -qqy --assume-yes --no-install-recommend ca-certificates curl; \
+	DEBIAN_FRONTEND=noninteractive apt-get install -qqy --assume-yes ca-certificates curl; \
 	apt-get clean; \
 	rm -rf /var/lib/apt/lists/*; \
 	
