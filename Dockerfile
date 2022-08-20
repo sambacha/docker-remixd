@@ -5,28 +5,26 @@ ENV LC_ALL=en_US.UTF-8
 
 USER root
 
-# save list of currently installed packages for later so we can clean up
 RUN set -eux; \
 	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
         DEBIAN_FRONTEND=noninteractive apt-get install -qqy --assume-yes --no-install-recommends \
-        ca-certificates \
-        git \
-	locales-all \
-	locales \
+	ca-certificates \
         curl; \
-	update-locale LANG=en_US.UTF-8 && locale-gen en_US.UTF-8; \
-        apt-get clean; \
+	apt-get clean; \
 	rm -rf /var/lib/apt/lists/*; \
 	apt-mark auto '.*' > /dev/null; \
 	[ -z "$savedAptMark" ] || apt-mark manual $savedAptMark; \
 	apt-get purge -y -qq --auto-remove -o APT::AutoRemove::RecommendsImportant=false;
 
-ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8 
+ENV LANGUAGE=en_US:en 
+ENV LC_ALL=en_US.UTF-8
+
 RUN yes | adduser --disabled-password remix && mkdir -p /app
 USER remix
 WORKDIR /home/remix
-RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
+
 
 RUN npm install -g @remix-project/remixd@0.6.5
 
