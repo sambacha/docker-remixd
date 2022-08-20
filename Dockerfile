@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile-upstream:master-experimental
-FROM node:14.19.3-bullseye
+FROM node:16.17.0-bullseye-slim
 
 ENV LC_ALL=en_US.UTF-8
 
@@ -9,17 +9,26 @@ USER root
 RUN set -eux; \
 	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
-    DEBIAN_FRONTEND=noninteractive apt-get install -qqy --assume-yes --no-install-recommends \
-    ca-certificates \
-    git \
-    curl; \
-    apt-get clean; \
+        DEBIAN_FRONTEND=noninteractive apt-get install -qqy --assume-yes --no-install-recommends \
+        ca-certificates \
+        git \
+	locales-all \
+	locales \
+        curl; \
+	update-locale LANG=en_US.UTF-8 && locale-gen en_US.UTF-8; \
+        apt-get clean; \
 	rm -rf /var/lib/apt/lists/*; \
 	apt-mark auto '.*' > /dev/null; \
 	[ -z "$savedAptMark" ] || apt-mark manual $savedAptMark; \
 	apt-get purge -y -qq --auto-remove -o APT::AutoRemove::RecommendsImportant=false;
 
-RUN npm install -g @remix-project/remixd
+ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
+RUN yes | adduser --disabled-password remix && mkdir -p /app
+USER remix
+WORKDIR /home/remix
+RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
+
+RUN npm install -g @remix-project/remixd@0.6.5
 
 RUN sed -i s/127.0.0.1/0.0.0.0/g /usr/local/lib/node_modules/\@remix-project/remixd/websocket.js
 
@@ -28,7 +37,6 @@ COPY origins.json /usr/local/lib/node_modules/\@remix-project/remixd/
 EXPOSE 65520 8080 8000 65522
 
 STOPSIGNAL SIGQUIT
-
 
 ENTRYPOINT ["/usr/local/bin/remixd", "-s", "/app"]
 
