@@ -6,25 +6,14 @@ ENV LC_ALL=en_US.UTF-8
 USER root
 
 RUN set -eux; \
-	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
-        DEBIAN_FRONTEND=noninteractive apt-get install -qqy --assume-yes --no-install-recommends \
-	ca-certificates \
-        curl; \
+	DEBIAN_FRONTEND=noninteractive apt-get install -qqy --assume-yes --no-install-recommend ca-certificates curl; \
 	apt-get clean; \
 	rm -rf /var/lib/apt/lists/*; \
-	apt-mark auto '.*' > /dev/null; \
-	[ -z "$savedAptMark" ] || apt-mark manual $savedAptMark; \
-	apt-get purge -y -qq --auto-remove -o APT::AutoRemove::RecommendsImportant=false;
-
+	
 ENV LANG=en_US.UTF-8 
 ENV LANGUAGE=en_US:en 
 ENV LC_ALL=en_US.UTF-8
-
-RUN yes | adduser --disabled-password remix && mkdir -p /app
-USER remix
-WORKDIR /home/remix
-
 
 RUN npm install -g @remix-project/remixd@0.6.5
 
