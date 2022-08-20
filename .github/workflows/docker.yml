@@ -1,7 +1,7 @@
-name: ci
+name: docker
 
 on:
-  push:
+  pull_request:
     branches:
       - 'master'
     tags:
