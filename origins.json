@@ -10,9 +10,13 @@
     "package://6fd22d6fe5549ad4c4d8fd3ca0b7816b.mod",
     "https://ipfsgw.komputing.org",
     "http://localhost:8080",
-    "http://127.0.0.1",
     "http://localhost:65520",
     "http://localhost:65523",
-    "http://localhost:65522"
+    "http://localhost:65522",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://127.0.0.1:8080",
+    "ws://127.0.0.1",
+    "ws://localhost"
   ]
 }
