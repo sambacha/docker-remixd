@@ -1,0 +1,5 @@
+# -*- mode: hadolint; -*-
+# see https://github.com/hadolint/hadolint#rules for a list of available rules.
+# DL3015 no install recommends 
+# DL3008 pin apt versions
+ignored: ['DL3018', 'DL3020', 'DL3018', 'DL3008', 'DL3015']

@@ -1,34 +1,28 @@
 # syntax=docker/dockerfile-upstream:master-experimental
-FROM node:14.19.3-bullseye
-
-ENV LC_ALL=en_US.UTF-8
+FROM node:16.17.1-buster-slim
 
 USER root
 
-# save list of currently installed packages for later so we can clean up
 RUN set -eux; \
-	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
-    DEBIAN_FRONTEND=noninteractive apt-get install -qqy --assume-yes --no-install-recommends \
-    ca-certificates \
-    git \
-    curl; \
-    apt-get clean; \
-	rm -rf /var/lib/apt/lists/*; \
-	apt-mark auto '.*' > /dev/null; \
-	[ -z "$savedAptMark" ] || apt-mark manual $savedAptMark; \
-	apt-get purge -y -qq --auto-remove -o APT::AutoRemove::RecommendsImportant=false;
+	DEBIAN_FRONTEND=noninteractive apt-get install -qqy --assume-yes --no-install-recommends git ca-certificates curl; \
+	apt-get clean; \
+	rm -rf /var/lib/apt/lists/*;
 
-RUN npm install -g @remix-project/remixd
+RUN npm install -g @remix-project/remixd@0.6.6 && npm cache clean --force
 
-RUN sed -i s/127.0.0.1/0.0.0.0/g /usr/local/lib/node_modules/\@remix-project/remixd/websocket.js
+RUN sed -i s/127.0.0.1/0.0.0.0/g /usr/local/lib/node_modules/@remix-project/remixd/src/websocket.js
 
 COPY origins.json /usr/local/lib/node_modules/\@remix-project/remixd/
+
+# 65522 = Hardhat
+# 65520 = Remixd 
 
 EXPOSE 65520 8080 8000 65522
 
 STOPSIGNAL SIGQUIT
 
+#CMD [ "node", "--max-old-space-size=768", "/usr/local/bin/remixd" ]
 
 ENTRYPOINT ["/usr/local/bin/remixd", "-s", "/app"]
 
@@ -38,6 +32,6 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.url="https://github.com/sambacha/docker-remixd" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.vcs-url="https://github.com/sambacha/docker-remixd.git" \
-      org.label-schema.vendor="CommodityStream, Inc" \
+      org.label-schema.vendor="Ethereum" \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0"
