@@ -1,22 +1,25 @@
 {
-  "data": [
-    "https://remix.ethereum.org",
-    "https://remix-alpha.ethereum.org",
-    "https://remix-beta.ethereum.org",
-    "http://remix.ethereum.org",
-    "http://remix-alpha.ethereum.org",
-    "http://remix-beta.ethereum.org",
-    "package://a7df6d3c223593f3550b35e90d7b0b1f.mod",
-    "package://6fd22d6fe5549ad4c4d8fd3ca0b7816b.mod",
-    "https://ipfsgw.komputing.org",
-    "http://localhost:8080",
-    "http://localhost:65520",
-    "http://localhost:65523",
-    "http://localhost:65522",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    "http://127.0.0.1:8080",
-    "ws://127.0.0.1",
-    "ws://localhost"
-  ]
+	"data": [
+		"https://remix.ethereum.org",
+		"https://remix-alpha.ethereum.org",
+		"https://remix-beta.ethereum.org",
+		"http://remix.ethereum.org",
+		"http://remix-alpha.ethereum.org",
+		"http://remix-beta.ethereum.org",
+		"package://a7df6d3c223593f3550b35e90d7b0b1f.mod",
+		"package://6fd22d6fe5549ad4c4d8fd3ca0b7816b.mod",
+		"https://ipfsgw.komputing.org",
+		"https://jqgt.remixproject.org",
+		"https://api.securerpc.com/v1",
+		"https://derp.ipfs.st",
+		"http://localhost:8080",
+		"http://localhost:65520",
+		"http://localhost:65523",
+		"http://localhost:65522",
+		"http://localhost:8000",
+		"http://127.0.0.1:8000",
+		"http://127.0.0.1:8080",
+		"ws://127.0.0.1",
+		"ws://localhost"
+	]
 }
