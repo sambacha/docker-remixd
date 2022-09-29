@@ -17,8 +17,9 @@ COPY origins.json /usr/local/lib/node_modules/\@remix-project/remixd/
 
 # 65522 = Hardhat
 # 65520 = Remixd 
+# 65525 = Foundry
 
-EXPOSE 65520 8080 8000 65522
+EXPOSE 65520 8080 8000 65522 65525
 
 STOPSIGNAL SIGQUIT
 
