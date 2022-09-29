@@ -5,7 +5,7 @@ USER root
 
 RUN set -eux; \
 	apt-get update; \
-	DEBIAN_FRONTEND=noninteractive apt-get install -qqy --assume-yes git ca-certificates curl; \
+	DEBIAN_FRONTEND=noninteractive apt-get install -qqy --assume-yes --no-install-recommends git ca-certificates curl; \
 	apt-get clean; \
 	rm -rf /var/lib/apt/lists/*;
 
@@ -19,7 +19,6 @@ COPY origins.json /usr/local/lib/node_modules/\@remix-project/remixd/
 # 65520 = Remixd 
 
 EXPOSE 65520 8080 8000 65522
-
 
 STOPSIGNAL SIGQUIT
 
