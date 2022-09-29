@@ -11,9 +11,12 @@ RUN set -eux; \
 
 RUN npm install -g @remix-project/remixd@0.6.6 && npm cache clean --force
 
-RUN sed -i s/127.0.0.1/0.0.0.0/g /usr/local/lib/node_modules/\@remix-project/remixd/websocket.js
+RUN sed -i s/127.0.0.1/0.0.0.0/g /usr/local/lib/node_modules/@remix-project/remixd/src/websocket.js
 
 COPY origins.json /usr/local/lib/node_modules/\@remix-project/remixd/
+
+# 65522 = Hardhat
+# 65520 = Remixd 
 
 EXPOSE 65520 8080 8000 65522
 
