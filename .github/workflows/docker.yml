@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "naster" ]
   pull_request:
-    branches: [ "naster" ]
+   
 
 env:
   REGISTRY: ghcr.io
